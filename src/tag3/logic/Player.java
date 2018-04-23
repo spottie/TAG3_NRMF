@@ -8,9 +8,22 @@ public class Player {
     private int health = 100;
     private int damage = 1;
     private boolean correctRoom;
+    private boolean attackTurn;
     private Room activeRoom;
     private ArrayList<Item> backpack = new ArrayList();
 
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+    public void setBackpack(ArrayList<Item> backpack) {
+        this.backpack = backpack;
+    }
+    
     public String getName() {
         return name;
     }
@@ -81,6 +94,22 @@ public class Player {
         this.damage += damage;
     }
 
+    public void autoHit(NPC n, Item i) {
+          n.setHealth((health) - 25);
+          setAttackTurn(false);
+          n.setAttackTurn(true);
+    }
+
+    public boolean isAttackTurn() {
+        return attackTurn;
+    }
+
+    public void setAttackTurn(boolean attackTurn) {
+        this.attackTurn = attackTurn;
+    }
+    
+    
+    
     @Override
     public String toString() {
         if (backpack.isEmpty()) {

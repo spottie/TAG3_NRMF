@@ -2,27 +2,27 @@ package tag3.logic;
 
 public class Dungeon {
 
-    private Room room1 = new Room("Name1", "Description1", new Health_Potion("Health_potion"));
-    private Room room2 = new Room("Name2", "Description2", null);
-    private Room room3 = new Room("Name3", "Description3", null);
-    private Room room4 = new Room("Name4", "Description4", null);
-    private Room room5 = new Room("Name5", "Description5", new Axe("Axe"));
-    private Room room6 = new Room("Name6", "Description6", null);
-    private Room room7 = new Room("Name7", "Description7", null);
-    private Room room8 = new Room("Name8", "Description8", null);
-    private Room room9 = new Room("Name9", "Description9", null);
-    private Room room10 = new Room("Name10", "Description10", new Health_Potion("Health_potion"));
-    private Room room11 = new Room("Name11", "Description11", null);
-    private Room room12 = new Room("Name12", "Description12", null);
-    private Room room13 = new Room("Name13", "Description13", null);
-    private Room room14 = new Room("Name14", "Description14", null);
-    private Room room15 = new Room("Name15", "Description15", null);
-    private Room room16 = new Room("Name16", "Description16", null);
-    private Room room17 = new Room("Name17", "Description17", null);
-    private Room room18 = new Room("Name18", "Description18", null);
-    private Room room19 = new Room("Name19", "Description19", null);
-    private Room room20 = new Room("Name20", "Description20", null);
-    private Room room21 = new Room("Name21", "Description21", null);
+    private Room room1 = new Room("Name1", "Description1", new Health_Potion("Health_potion", 0), null);
+    private Room room2 = new Room("Name2", "Description2", null, null);
+    private Room room3 = new Room("Name3", "Description3", null, null);
+    private Room room4 = new Room("Name4", "Description4", null, null);
+    private Room room5 = new Room("Name5", "Description5", null, null);
+    private Room room6 = new Room("Name6", "Description6", new Axe("Axe", 25), null);
+    private Room room7 = new Room("Name7", "Description7", null, null);
+    private Room room8 = new Room("Name8", "Description8", new Axe("Axe", 25), null);
+    private Room room9 = new Room("Name9", "Description9", null, null);
+    private Room room10 = new Room("Name10", "Description10", new Health_Potion("Health_potion", 0), new MarkoMonster("MarkoMonster", 250, 5));
+    private Room room11 = new Room("Name11", "Description11", null, null);
+    private Room room12 = new Room("Name12", "Description12", null, null);
+    private Room room13 = new Room("Name13", "Description13", null, null);
+    private Room room14 = new Room("Name14", "Description14", null, null);
+    private Room room15 = new Room("Name15", "Description15", new Axe("Bloodthirst Axe", 32), null);
+    private Room room16 = new Room("Name16", "Description16", null, null);
+    private Room room17 = new Room("Name17", "Description17", null, null);
+    private Room room18 = new Room("Name18", "Description18", null, null);
+    private Room room19 = new Room("Name19", "Description19", null, null);
+    private Room room20 = new Room("Name20", "Description20", null, null);
+    private Room room21 = new Room("Name21", "Description21", new Health_Potion("Health_potion", 0), new MarkoMonster ("Final_Boss", 400, 5));
     
     public Room createRoomsInDungeon(){
         //Room 1 - Directions

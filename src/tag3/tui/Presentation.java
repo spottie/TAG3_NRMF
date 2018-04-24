@@ -15,6 +15,7 @@ public class Presentation {
     public static final String QUIT = "quit";
     public static final String PICK_UP = "pick up";
     public static final String USE = "use";
+    public static final String ATTACK = "attack";
     
     Scanner scan = new Scanner(System.in);
 
@@ -95,6 +96,7 @@ public class Presentation {
         System.out.println("Type 'start' to start the game!");
         System.out.println("Type 'pick-up' in order to collect an item!");
         System.out.println("Type 'use' in order to use the item!");
+        System.out.println("Type 'attack' in order to attack npc!");
     }
 
     //Help
@@ -148,5 +150,25 @@ public class Presentation {
     public String itemInput(){
         System.out.println("What item do you want to use?");
         return scan.nextLine();
+    }
+    
+    public void playerAttack(int npcHealth) {
+        System.out.println("NPC \nRemaining health: " + npcHealth);
+    }
+    
+    public void npcAttack(int playerHealth) {
+        System.out.println("\nPlayer \nRemaining health: " + playerHealth + "\n********************************************");
+    }
+    
+    public void npcDefeated() {
+        System.out.println("You defeated the monster! ");
+    }
+    
+    public void playerDied() {
+        System.out.println("You died!");
+    }
+    
+    public void noMonsterInRoom() {
+        System.out.println("There is not a monster in this room!");
     }
 }

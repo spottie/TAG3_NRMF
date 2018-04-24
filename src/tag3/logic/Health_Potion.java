@@ -4,8 +4,8 @@ public class Health_Potion extends Item {
     
     private int healthPotion = 50;
     
-    public Health_Potion(String name) {
-        super(name);
+    public Health_Potion(String name, int weaponDamage) {
+        super(name, weaponDamage);
     }
 
     @Override

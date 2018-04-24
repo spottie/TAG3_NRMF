@@ -1,23 +1,43 @@
 package tag3.logic;
 
-public class MarkoMonster extends NPC {
+import java.util.Random;
 
+public class MarkoMonster extends NPC {
     
-    public MarkoMonster(int health, int damage) {
-        super(health, damage);
+    Random rand = new Random();
+    private int humanFlagAttack = 20;
+    
+    public MarkoMonster(String name, int health, int damage) {
+        super(name, health, damage);
+    }
+    
+    @Override
+    public void autoHit(Player p) {
+        p.setHealth(p.getHealth() - this.getDamage());
+    }
+    
+    public void humanFlagAttack(Player p) {
+        p.setHealth(p.getHealth() - humanFlagAttack);
+    }
+    
+    public void hit(Player p) {
+        int n = rand.nextInt(100) + 1;
+        if (n < 90) {
+            autoHit(p);
+        } else {
+            humanFlagAttack(p);
+        }   
+    }
+    
+    public boolean isAlive() {
+        if(this.getHealth() > 0) return true;
+        return false;
     }
 
     @Override
-    public void autoHit(boolean attackTurn, Player p) {
-        p.setHealth(p.getHealth() - this.getDamage());
-        super.setAttackTurn(false);
-        p.setAttackTurn(true);
+    public boolean isDead() {
+        if(this.getHealth() <= 0) return true;
+        return false;
     }
-
-    public void humanFlagAttack(boolean attackTurn, Player p) {
-        p.setHealth(p.getHealth() - 20);
-        super.setAttackTurn(false);
-        p.setAttackTurn(true);
-    }
-     
+    
 }

@@ -5,11 +5,13 @@ public class Room {
     private String name, description;
     private Room east, west, north, south;
     private Item item;
+    private NPC npc;
 
-    public Room(String name, String description, Item item) {
+    public Room(String name, String description, Item item, NPC npc) {
         this.name = name;
         this.description = description;
         this.item = item;
+        this.npc = npc;
     }
 
     public String getName() {
@@ -55,14 +57,30 @@ public class Room {
     public void setItemPickedUp(Item item) {
         this.item = null;
     }
+    
+    public void npcKilled(NPC npc) {
+        this.npc = null;
+    }
+    
+    public NPC getNPC() {
+        return npc;
+    }
 
     @Override
     public String toString() {
-        if(item == null){
+        if(item == null && npc == null){
             return "Room Name: " + name + "\nRoom Description: " + description;
         }
-        else {
+        
+        else if(item == null) {
+            return "Room Name: " + name + "\nRoom Description: " + description + "\nRoom Item: " + npc.getName();
+        }
+        
+        else if(npc == null) {
             return "Room Name: " + name + "\nRoom Description: " + description + "\nRoom Item: " + item.getName();
+        }
+        else {
+            return "Room Name: " + name + "\nRoom Description: " + description + "\nRoom Item: " + item.getName() + "\nRoom Monster: " + npc.getName();
         }
     }
 }

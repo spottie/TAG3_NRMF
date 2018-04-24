@@ -1,16 +1,19 @@
 package tag3.logic;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Player {
 
     private String name;
     private int health = 100;
     private int damage = 1;
+    private int frankoKillerKick = 50;
     private boolean correctRoom;
-    private boolean attackTurn;
     private Room activeRoom;
     private ArrayList<Item> backpack = new ArrayList();
+
+    Random rand = new Random();
 
     public void setHealth(int health) {
         this.health = health;
@@ -23,7 +26,7 @@ public class Player {
     public void setBackpack(ArrayList<Item> backpack) {
         this.backpack = backpack;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -94,22 +97,37 @@ public class Player {
         this.damage += damage;
     }
 
-    public void autoHit(NPC n, Item i) {
-          n.setHealth((health) - 25);
-          setAttackTurn(false);
-          n.setAttackTurn(true);
+    public void hit(NPC n) {
+        int r = rand.nextInt(100) + 1;
+        if (r < 70) {
+            autoHit(n);
+        } else {
+            frankoKillerKick(n);
+        }
     }
 
-    public boolean isAttackTurn() {
-        return attackTurn;
+    public void autoHit(NPC n) {
+        n.setHealth((n.getHealth()) - damage);
     }
 
-    public void setAttackTurn(boolean attackTurn) {
-        this.attackTurn = attackTurn;
+    public void frankoKillerKick(NPC n) {
+        n.setHealth(n.getHealth() - frankoKillerKick);
     }
-    
-    
-    
+
+    public boolean isAlive() {
+        if (this.getHealth() > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isDead() {
+        if (this.getHealth() <= 0) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
         if (backpack.isEmpty()) {
@@ -123,4 +141,5 @@ public class Player {
             return "Player Backpack: " + overview;
         }
     }
+
 }

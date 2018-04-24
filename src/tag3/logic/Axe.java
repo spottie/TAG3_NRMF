@@ -1,16 +1,14 @@
 package tag3.logic;
 
 public class Axe extends Item{
-    
-    private int damage = 25;
-    
-    public Axe(String name) {
-        super(name);
-    }
 
+    public Axe(String name, int weaponDamage) {
+        super(name, weaponDamage);
+    }
+    
     @Override
     public void use(Player player) {
-        player.increaseDamage(damage);
+        player.increaseDamage(getWeaponDamage());
     }
     
     

@@ -16,7 +16,7 @@ public class Dungeon {
     private Room room12 = new Room("Name12", "Description12", null, null);
     private Room room13 = new Room("Name13", "Description13", null, null);
     private Room room14 = new Room("Name14", "Description14", null, null);
-    private Room room15 = new Room("Name15", "Description15", new Axe("Bloodthirst Axe", 32), null);
+    private Room room15 = new Room("Name15", "Description15", new Axe("Bloodthirst Axe", 45), null);
     private Room room16 = new Room("Name16", "Description16", null, null);
     private Room room17 = new Room("Name17", "Description17", null, null);
     private Room room18 = new Room("Name18", "Description18", null, null);

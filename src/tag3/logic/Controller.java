@@ -19,10 +19,14 @@ public class Controller {
 
     Random rand = new Random();
     Dungeon dungeon = new Dungeon();
-    Player player = new Player();
+    Player player;
     Presentation tui = new Presentation();
     NPC npc;
     MarkoMonster mm;
+
+    public Controller(Player player) {
+        this.player = player;
+    }
 
     public void play() throws InterruptedException {
         player();

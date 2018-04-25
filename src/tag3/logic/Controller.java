@@ -137,31 +137,7 @@ public class Controller {
                 tui.showPlayerBackpack(playerBackpackNew);
                 break;
             case ATTACK:
-                npc = player.getActiveRoom().getNPC();
-                if (npc != null) {
-                    while (player.isAlive() && npc.isAlive()) {
-                        if (player.isAlive()) {
-                            player.hit(npc);
-                            int npcHealth = npc.getHealth();
-                            tui.playerAttack(npcHealth);
-                            if (npc.isDead()) {
-                                tui.npcDefeated();
-                            }
-                        }
-                        if (npc.isAlive()) {
-                            npc.hit(player);
-                            int playerHealth = player.getHealth();
-                            tui.npcAttack(playerHealth);
-                            if (player.isDead()) {
-                                tui.playerDied();
-                            }
-                        }
-                        Thread.sleep(2000);
-                    }
-                    break;
-                } else {
-                    tui.noMonsterInRoom();
-                }
+                combat();
             default:
                 break;
         }
@@ -171,6 +147,42 @@ public class Controller {
         if (player.getActiveRoom().getName().equals(WINROOM)) {
             tui.winGameMessage();
             System.exit(0);
+        }
+    }
+    
+    public void combat() throws InterruptedException {
+        npc = player.getActiveRoom().getNPC();
+                if (npc != null) {
+                    while (player.isAlive() && npc.isAlive()) {
+                        playerCombat();
+                        Thread.sleep(2000);
+                        npcCombat();
+                    }
+                } else {
+                    tui.noMonsterInRoom();
+                }
+    }
+
+    public void playerCombat() {
+        if (player.isAlive()) {
+            player.hit(npc);
+            int npcHealth = npc.getHealth();
+            tui.playerAttack(npcHealth);
+            if (npc.isDead()) {
+                tui.npcDefeated();
+            }
+        }
+    }
+
+    public void npcCombat() {
+        if (npc.isAlive()) {
+            npc.hit(player);
+            int playerHealth = player.getHealth();
+            tui.npcAttack(playerHealth);
+            if (player.isDead()) {
+                tui.playerDied();
+                System.exit(0);
+            }
         }
     }
 

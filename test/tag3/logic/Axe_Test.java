@@ -12,7 +12,7 @@ public class Axe_Test {
     @Test
     public void testUseAxe() {
         //Arrange
-        Item item = new Axe("Axe");
+        Item item = new Axe("Axe", 25);
         Player player = new Player(); 
         int expectedDamageResult = 26;
         //Act

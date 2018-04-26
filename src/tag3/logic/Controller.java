@@ -1,10 +1,8 @@
 package tag3.logic;
 
-import java.util.ArrayList;
 import tag3.data.HighScoreFile;
 import tag3.data.HighScoreUI;
 import tag3.tui.Presentation;
-import tag3.logic.Room;
 import static tag3.tui.Presentation.ATTACK;
 import static tag3.tui.Presentation.EAST;
 import static tag3.tui.Presentation.HELP;
@@ -17,15 +15,15 @@ import static tag3.tui.Presentation.WEST;
 
 public class Controller {
 
-    private final String WINROOM = "Name21";
-    private final String FILENAME = "highscore.txt";
-
     Dungeon dungeon = new Dungeon();
     HighScore highscore = new HighScore();
     HighScoreUI highscoreUI = new HighScoreFile();
     Player player;
     Presentation tui = new Presentation();
     NPC npc;
+    
+    private final String FILENAME = "highscore.txt";
+    private final String FINALBOSS = dungeon.getFinalBossName();
 
     public Controller(Player player) {
         this.player = player;
@@ -83,7 +81,6 @@ public class Controller {
             tui.showRoomInformation(activeRoomInfo);
             String playerBackpack = player.toString();
             tui.showPlayerBackpack(playerBackpack);
-            winGame();
         }
     }
 
@@ -94,8 +91,7 @@ public class Controller {
                 if (player.getActiveRoom().getNPC() != null) {
                     tui.cantMoveWhenMonsterAlive();
                     break;
-                }
-                else if (!player.movePlayer(player.getActiveRoom().getNorth())) {
+                } else if (!player.movePlayer(player.getActiveRoom().getNorth())) {
                     tui.errorWrongDirection();
                 }
                 break;
@@ -103,8 +99,7 @@ public class Controller {
                 if (player.getActiveRoom().getNPC() != null) {
                     tui.cantMoveWhenMonsterAlive();
                     break;
-                }
-                else if (!player.movePlayer(player.getActiveRoom().getSouth())) {
+                } else if (!player.movePlayer(player.getActiveRoom().getSouth())) {
                     tui.errorWrongDirection();
                 }
                 break;
@@ -112,8 +107,7 @@ public class Controller {
                 if (player.getActiveRoom().getNPC() != null) {
                     tui.cantMoveWhenMonsterAlive();
                     break;
-                }
-                else if (!player.movePlayer(player.getActiveRoom().getEast())) {
+                } else if (!player.movePlayer(player.getActiveRoom().getEast())) {
                     tui.errorWrongDirection();
                 }
                 break;
@@ -121,8 +115,7 @@ public class Controller {
                 if (player.getActiveRoom().getNPC() != null) {
                     tui.cantMoveWhenMonsterAlive();
                     break;
-                }
-                else if (!player.movePlayer(player.getActiveRoom().getWest())) {
+                } else if (!player.movePlayer(player.getActiveRoom().getWest())) {
                     tui.errorWrongDirection();
                 }
                 break;
@@ -160,37 +153,18 @@ public class Controller {
                 break;
         }
     }
-    
-    public void setNpcInRoomToNull() {
-        if(player.getActiveRoom().getNPC().getHealth() <= 0) {
-            player.getActiveRoom().setNpc(null);
-//            if(player.getActiveRoom().getNPC() == null) {
-//                System.out.println("DET LYKKEDES!!!!");
-//            }
-        }
-    }
 
-    public void winGame() {
-        if (player.getActiveRoom().equals(WINROOM) && player.getActiveRoom().getNPC().getHealth() <= 0) {
-            tui.winGameMessage();
-            highscore.setEnd();
-            highscoreUI.addHighscoreToFile(FILENAME, highscore.getHighscoreInfo(player));
-            System.exit(0);
-        }
-    }
-    
     public void combat() throws InterruptedException {
         npc = player.getActiveRoom().getNPC();
-                if (npc != null) {
-                    while (player.isAlive() && npc.isAlive()) {
-                        playerCombat();
-                        setNpcInRoomToNull();
-                        Thread.sleep(2000);
-                        npcCombat();
-                    }
-                } else {
-                    tui.noMonsterInRoom();
-                }
+        if (npc != null) {
+            while (player.isAlive() && npc.isAlive()) {
+                playerCombat();
+                Thread.sleep(2000);
+                npcCombat();
+            }
+        } else {
+            tui.noMonsterInRoom();
+        }
     }
 
     public void playerCombat() {
@@ -199,6 +173,10 @@ public class Controller {
             int npcHealth = npc.getHealth();
             tui.playerAttack(npcHealth);
             if (npc.isDead()) {
+                if (npc.getName().equals(FINALBOSS)) {
+                    winGame();
+                }
+                player.getActiveRoom().npcKilled(npc);
                 tui.npcDefeated();
             }
         }
@@ -214,5 +192,12 @@ public class Controller {
                 System.exit(0);
             }
         }
+    }
+    
+    public void winGame() {
+        tui.winGameMessage();
+        highscore.setEnd();
+        highscoreUI.addHighscoreToFile(FILENAME, highscore.getHighscoreInfo(player));
+        System.exit(0);
     }
 }

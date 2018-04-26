@@ -11,7 +11,7 @@ public class Dungeon {
     private Room room7 = new Room("Name7", "Description7", null, null);
     private Room room8 = new Room("Name8", "Description8", new Axe("Axe", 25), null);
     private Room room9 = new Room("Name9", "Description9", null, null);
-    private Room room10 = new Room("Name10", "Description10", new Health_Potion("Health_potion", 0), new MarkoMonster("MarkoMonster", 250, 5));
+    private Room room10 = new Room("Name10", "Description10", new Health_Potion("Health_potion", 0), new MarkoMonster("MarkoMonster", 50, 5));
     private Room room11 = new Room("Name11", "Description11", null, null);
     private Room room12 = new Room("Name12", "Description12", null, null);
     private Room room13 = new Room("Name13", "Description13", null, null);
@@ -22,11 +22,7 @@ public class Dungeon {
     private Room room18 = new Room("Name18", "Description18", null, null);
     private Room room19 = new Room("Name19", "Description19", null, null);
     private Room room20 = new Room("Name20", "Description20", null, null);
-    private Room room21 = new Room("Name21", "Description21", new Health_Potion("Health_potion", 0), new MarkoMonster ("Final_Boss", 400, 5));
-    
-//    public void setNpcInRoomToNull() {
-//        
-//    }
+    private Room room21 = new Room("Name21", "Description21", new Health_Potion("Health_potion", 0), new MarkoMonster ("Final_Boss", 50, 5));
     
     public Room createRoomsInDungeon(){
         //Room 1 - Directions
@@ -116,6 +112,10 @@ public class Dungeon {
         room21.setSouth(room16);
         
         return room1;
+    }
+    
+    public String getFinalBossName(){
+        return room21.getNPC().getName();
     }
 
 }

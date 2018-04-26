@@ -75,11 +75,9 @@ public class Room {
         if(item == null && npc == null){
             return "Room Name: " + name + "\nRoom Description: " + description;
         }
-        
         else if(item == null) {
-            return "Room Name: " + name + "\nRoom Description: " + description + "\nRoom Item: " + npc.getName();
+            return "Room Name: " + name + "\nRoom Description: " + description + "\nRoom Monster: " + npc.getName();
         }
-        
         else if(npc == null) {
             return "Room Name: " + name + "\nRoom Description: " + description + "\nRoom Item: " + item.getName();
         }

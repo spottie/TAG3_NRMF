@@ -118,24 +118,19 @@ public class Presentation {
     //Navigate
     public void errorWrongDirection() {
         System.out.println("Wrong direction! Try again!");
-    }
+    }  
     
     //Navigate
-    public String inputCommandAllowed(ArrayList<String> commands) {
-        
-        String input = "";
+    public String inputCommandAllowed() {
+        System.out.println("Type direction in order to move in the dungeon: ");
+        return scan.nextLine();
+    }
 
-        while (!commands.contains(input)) {
-            System.out.println("Type direction in order to move in the dungeon: ");
-            input = scan.nextLine();
+    //Navigate
+    public void errorCommandAllowed() {
+        System.out.println("Invalid input. Type 'help' for instructions!");
 
-            if (!commands.contains(input)) {
-                System.out.println("Invalid input. Type 'help' for instructions!");
-            }
-        }
-        
-        return input;
-    }    
+    }
     
     //Item
     public void showPlayerBackpack(String backpack){

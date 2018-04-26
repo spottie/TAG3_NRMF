@@ -1,7 +1,8 @@
 package tag3.logic;
 
-import java.util.Random;
 import java.util.ArrayList;
+import tag3.data.HighScoreFile;
+import tag3.data.HighScoreUI;
 import tag3.tui.Presentation;
 import static tag3.tui.Presentation.ATTACK;
 import static tag3.tui.Presentation.EAST;
@@ -16,13 +17,14 @@ import static tag3.tui.Presentation.WEST;
 public class Controller {
 
     private final String WINROOM = "Name21";
+    private final String FILENAME = "highscore.txt";
 
-    Random rand = new Random();
     Dungeon dungeon = new Dungeon();
+    HighScore highscore = new HighScore();
+    HighScoreUI highscoreUI = new HighScoreFile();
     Player player;
     Presentation tui = new Presentation();
     NPC npc;
-    MarkoMonster mm;
 
     public Controller(Player player) {
         this.player = player;
@@ -64,6 +66,7 @@ public class Controller {
         tui.separator();
         String activeRoomInfo = player.getActiveRoom().toString();
         tui.showRoomInformation(activeRoomInfo);
+        highscore.setStart();
     }
 
     public void game() throws InterruptedException {
@@ -71,8 +74,8 @@ public class Controller {
             tui.separator();
             player.setCorrectRoom(false);
             while (!player.isCorrectRoom()) {
-                String inputCommand = tui.inputCommandAllowed(commands());
-                commandsDirection(inputCommand);
+                String inputCommand = tui.inputCommandAllowed();
+                commands(inputCommand);
             }
             tui.separator();
             String activeRoomInfo = player.getActiveRoom().toString();
@@ -83,7 +86,7 @@ public class Controller {
         }
     }
 
-    public void commandsDirection(String inputCommand) throws InterruptedException {
+    public void commands(String inputCommand) throws InterruptedException {
 
         switch (inputCommand) {
             case NORTH:
@@ -106,14 +109,6 @@ public class Controller {
                     tui.errorWrongDirection();
                 }
                 break;
-            default:
-                commandsOther(inputCommand);
-                break;
-        }
-    }
-
-    public void commandsOther(String inputCommand) throws InterruptedException {
-        switch (inputCommand) {
             case HELP:
                 tui.separator();
                 tui.showHelp();
@@ -142,7 +137,9 @@ public class Controller {
                 break;
             case ATTACK:
                 combat();
+                break;
             default:
+                tui.errorCommandAllowed();
                 break;
         }
     }
@@ -150,6 +147,8 @@ public class Controller {
     public void winGame() {
         if (player.getActiveRoom().getName().equals(WINROOM)) {
             tui.winGameMessage();
+            highscore.setEnd();
+            highscoreUI.addHighscoreToFile(FILENAME, highscore.getHighscoreInfo(player));
             System.exit(0);
         }
     }
@@ -189,21 +188,4 @@ public class Controller {
             }
         }
     }
-
-    public ArrayList<String> commands() {
-        ArrayList<String> arrCommands = new ArrayList();
-
-        arrCommands.add(NORTH);
-        arrCommands.add(SOUTH);
-        arrCommands.add(EAST);
-        arrCommands.add(WEST);
-        arrCommands.add(HELP);
-        arrCommands.add(QUIT);
-        arrCommands.add(PICK_UP);
-        arrCommands.add(USE);
-        arrCommands.add(ATTACK);
-
-        return arrCommands;
-    }
-
 }

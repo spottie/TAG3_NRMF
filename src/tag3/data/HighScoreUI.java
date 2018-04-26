@@ -1,10 +1,9 @@
 
 package tag3.data;
 
-import tag3.logic.HighScore;
-import tag3.logic.Player;
+import java.util.ArrayList;
 
 public interface HighScoreUI {
-    public void addHighscoreToFile(String file, HighScore highscore, Player player);
-    public void sortHighscoreInFile();
+    public void addHighscoreToFile(String file, String input_highscore);
+    public ArrayList<String> readHighscoreInFile(String file);
 }

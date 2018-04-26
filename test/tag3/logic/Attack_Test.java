@@ -11,7 +11,7 @@ public class Attack_Test {
         Controller controller = new Controller(player);
         Room room10 = new Room("Name10", "Description10", new Health_Potion("Health_potion", 0), new MarkoMonster("MarkoMonster", 25, 5));
         player.setActiveRoom(room10);
-        controller.commandsOther("attack");
+        controller.commands("attack");
 
         Assert.assertEquals(true, room10.getNPC().isDead());
     }

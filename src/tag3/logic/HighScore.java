@@ -27,14 +27,12 @@ public class HighScore {
     }
 
     public String getHighscoreInfo(Player player) {
-        setEnd();
-        
         gametime = end - start;
 
         timeformat = new SimpleDateFormat("mm:ss:SSS");  
         
         time = new Date(gametime);
         
-        return player.getName() + " " + timeformat.format(time);
+        return timeformat.format(time) + " " + player.getName();
     }
 }

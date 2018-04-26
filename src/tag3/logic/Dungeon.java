@@ -24,6 +24,10 @@ public class Dungeon {
     private Room room20 = new Room("Name20", "Description20", null, null);
     private Room room21 = new Room("Name21", "Description21", new Health_Potion("Health_potion", 0), new MarkoMonster ("Final_Boss", 400, 5));
     
+//    public void setNpcInRoomToNull() {
+//        
+//    }
+    
     public Room createRoomsInDungeon(){
         //Room 1 - Directions
         room1.setEast(room2);

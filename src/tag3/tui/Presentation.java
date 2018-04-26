@@ -166,4 +166,8 @@ public class Presentation {
     public void noMonsterInRoom() {
         System.out.println("There is not a monster in this room!");
     }
+
+    public void cantMoveWhenMonsterAlive() {
+        System.out.println("Monster has to be defeated before you can move! \nYou need to write 'attack' in order to fight!");
+    }
 }

@@ -66,6 +66,10 @@ public class Room {
         return npc;
     }
 
+    public void setNpc(NPC npc) {
+        this.npc = npc;
+    }
+
     @Override
     public String toString() {
         if(item == null && npc == null){

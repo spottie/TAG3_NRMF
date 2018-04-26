@@ -13,7 +13,7 @@ public class Attack_Test {
         player.setActiveRoom(room10);
         controller.commands("attack");
 
-        Assert.assertEquals(true, room10.getNPC().isDead());
+        Assert.assertNull(room10.getNPC());
     }
     
     @Test
